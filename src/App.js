@@ -13,6 +13,7 @@ class App extends Component {
       isGalleryOpen: false
     }
   }
+  
 
   componentWillMount = () => {
     this.fetchPhotos()
