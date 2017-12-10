@@ -19,7 +19,6 @@ class App extends Component {
     .then((result)=>{
       let images = [];
       for (let data of result.data){
-        console.log(data)
         if (data.carousel_media) {
           for (let pic of data.carousel_media) {
             if (pic.images)
