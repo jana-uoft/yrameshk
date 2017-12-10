@@ -1,37 +1,39 @@
 import React, { Component } from 'react';
-import $ from "jquery";
 import Lightbox from 'react-image-lightbox';
 import Contact from './Contact';
+
+
+const images = Array.apply(null, {length: 28}).map(Number.call, Number)
 
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      images: [],
+      // images: [],
       photoIndex: 0,
       isGalleryOpen: false
     }
   }
-  
 
-  componentWillMount = () => {
-    this.fetchPhotos()
-    .then((result)=>{
-      let images = [];
-      for (let data of result.data){
-        if (data.carousel_media) {
-          for (let pic of data.carousel_media) {
-            if (pic.images)
-              images.push({url: pic.images.standard_resolution.url, caption: data.caption.text})
-          }
-        } else {
-          images.push({url: data.images.standard_resolution.url, caption: data.caption.text})
-        }
-      }
-      this.setState({ images });
-    })
-  }
+
+  // componentWillMount = () => {
+  //   this.fetchPhotos()
+  //   .then((result)=>{
+  //     let images = [];
+  //     for (let data of result.data){
+  //       if (data.carousel_media) {
+  //         for (let pic of data.carousel_media) {
+  //           if (pic.images)
+  //             images.push({url: pic.images.standard_resolution.url, caption: data.caption.text})
+  //         }
+  //       } else {
+  //         images.push({url: data.images.standard_resolution.url, caption: data.caption.text})
+  //       }
+  //     }
+  //     this.setState({ images });
+  //   })
+  // }
 
 
   showImageGallery = (photoIndex) => {
@@ -40,23 +42,27 @@ class App extends Component {
 
 
   renderImage = (image, index) => {
-    const imageTitle = image.caption.split("#")[0];
     return (
       <article className="thumb" key={index}>
-        <img src={image.url} alt={imageTitle} style={{cursor: 'pointer'}} onClick={()=>this.showImageGallery(index)}/>
-        <h2>{image.caption}</h2>
+        {index < 9 ?
+          <img src={"http://yrameshk.myddns.me/~Ramesh/user/pages/01.home/0"+(index+1).toString()+".jpg"} alt="ASD" style={{cursor: 'pointer'}} onClick={()=>this.showImageGallery(index)}/>
+          :
+          <img src={"http://yrameshk.myddns.me/~Ramesh/user/pages/01.home/"+(index+1).toString()+".jpg"} alt="ASD" style={{cursor: 'pointer'}} onClick={()=>this.showImageGallery(index)}/>
+        }
+       
+        <h2>"ASDASDDSSD"</h2>
       </article>
     );
   }
 
 
-  fetchPhotos = () => {
-    return $.ajax({
-        url: 'https://api.instagram.com/v1/users/self/media/recent/?access_token=508727293.1677ed0.69d96553324f4468917af711a368260b&count=20',
-        type: 'GET',
-        dataType: "jsonp"
-    });
-  }
+  // fetchPhotos = () => {
+  //   return $.ajax({
+  //       url: 'https://api.instagram.com/v1/users/self/media/recent/?access_token=508727293.1677ed0.69d96553324f4468917af711a368260b&count=20',
+  //       type: 'GET',
+  //       dataType: "jsonp"
+  //   });
+  // }
 
 
   render() {
@@ -112,22 +118,22 @@ class App extends Component {
     return (
       <div id="wrapper">
         {header}
-        <div id="main">{this.state.images.map(this.renderImage)}</div>
+        <div id="main">{images.map(this.renderImage)}</div>
         {footer}
 
         {this.state.isGalleryOpen &&
           <Lightbox
-            mainSrc={this.state.images[this.state.photoIndex].url}
-            nextSrc={this.state.images[(this.state.photoIndex + 1) % this.state.images.length].url}
-            prevSrc={this.state.images[(this.state.photoIndex + this.state.images.length - 1) % this.state.images.length].url}
+            mainSrc={this.state.photoIndex < 9 ? "http://yrameshk.myddns.me/~Ramesh/user/pages/01.home/0"+(this.state.photoIndex+1).toString()+".jpg" : "http://yrameshk.myddns.me/~Ramesh/user/pages/01.home/"+(this.state.photoIndex+1).toString()+".jpg"}
+            nextSrc={images[(this.state.photoIndex + 1) % images.length].url}
+            prevSrc={images[(this.state.photoIndex + images.length - 1) % images.length].url}
             onCloseRequest={() => {
               this.setState({ isGalleryOpen: false });
             }}
             onMovePrevRequest={() => this.setState({
-                photoIndex: (this.state.photoIndex + this.state.images.length - 1) % this.state.images.length,
+                photoIndex: (this.state.photoIndex + images.length - 1) % images.length,
             })}
             onMoveNextRequest={() => this.setState({
-                photoIndex: (this.state.photoIndex + 1) % this.state.images.length,
+                photoIndex: (this.state.photoIndex + 1) % images.length,
             })}
           />
         }
