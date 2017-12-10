@@ -45,9 +45,13 @@ class App extends Component {
     return (
       <article className="thumb" key={index}>
         {index < 9 ?
-          <img src={"http://yrameshk.myddns.me/~Ramesh/user/pages/01.home/0"+(index+1).toString()+".jpg"} alt="ASD" style={{cursor: 'pointer'}} onClick={()=>this.showImageGallery(index)}/>
+          <a class="image" style={{backgroundImage: "url('http://yrameshk.myddns.me/~Ramesh/user/pages/01.home/0"+(index+1).toString()+".jpg')"}} style={{cursor: 'pointer'}} onClick={()=>this.showImageGallery(index)}>
+            <img src={"http://yrameshk.myddns.me/~Ramesh/user/pages/01.home/0"+(index+1).toString()+".jpg"} alt="ASD" style={{cursor: 'pointer'}} onClick={()=>this.showImageGallery(index)}/>
+          </a>
           :
-          <img src={"http://yrameshk.myddns.me/~Ramesh/user/pages/01.home/"+(index+1).toString()+".jpg"} alt="ASD" style={{cursor: 'pointer'}} onClick={()=>this.showImageGallery(index)}/>
+          <a class="image" style={{backgroundImage: "url('http://yrameshk.myddns.me/~Ramesh/user/pages/01.home/"+(index+1).toString()+".jpg')"}} style={{cursor: 'pointer'}} onClick={()=>this.showImageGallery(index)}>
+            <img src={"http://yrameshk.myddns.me/~Ramesh/user/pages/01.home/"+(index+1).toString()+".jpg"} alt="ASD" style={{cursor: 'pointer'}} onClick={()=>this.showImageGallery(index)}/>
+          </a>
         }
        
         <h2>"ASDASDDSSD"</h2>

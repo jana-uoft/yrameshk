@@ -1543,6 +1543,7 @@
 			opacity: 1;
 			overflow: hidden;
 			position: relative;
+			
 		}
 
 			#main .thumb:after {
@@ -1575,6 +1576,8 @@
 				position: absolute;
 				top: 0;
 				width: 100%;
+				object-fit: contain;
+
 			}
 
 			#main .thumb > h2 {
